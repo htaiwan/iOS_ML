@@ -51,7 +51,7 @@ class ViewController: UIViewController {
             // 2. 將大小切割成227×227
             // 3. 將方向進行調整
             let request = VNCoreMLRequest(model: visionModel) { [weak self] request, error in
-                print("Request 已經完成", request.results ?? "")
+                self?.processObservations(for: request, error: error)
             }
             request.imageCropAndScaleOption = .centerCrop
             return request
@@ -136,6 +136,31 @@ class ViewController: UIViewController {
             } catch {
                 print("無法執行classification: \(error)")
             }
+        }
+    }
+    
+    func processObservations(for request: VNRequest, error: Error?) {
+        // 回到main queue執行對應的UI操作
+        DispatchQueue.main.async {
+            if let results = request.results as? [VNClassificationObservation] {
+                // 成功: 但沒東西
+                if results.isEmpty {
+                    self.resultsLabel.text = "沒找到任何東西"
+                } else if results[0].confidence < 0.8 {
+                    // 成功: 找到東西, 但不確定
+                    self.resultsLabel.text = "不確定"
+                } else {
+                    // 成功: 找到東西, 且確定
+                    self.resultsLabel.text = String(format: "%@ %.1f%%", results[0].identifier, results[0].confidence * 100)
+                }
+            } else if let error = error {
+                // 失敗: 錯誤原因
+                self.resultsLabel.text = "錯誤: \(error.localizedDescription)"
+            } else {
+                // 未知狀況
+                self.resultsLabel.text = "發生未知狀況"
+            }
+            self.showResultsView()
         }
     }
 }
