@@ -120,6 +120,23 @@ class ViewController: UIViewController {
     }
     
     func classify(image: UIImage) {
+        // 將UIImage轉成CIImage
+        guard let ciImage = CIImage(image: image) else {
+            print("無法產生CIImage")
+            return
+        }
+        // 很重要: 取得目前圖片的方向, 之後Vision才有辦法做正確的轉向
+        let orientation = CGImagePropertyOrientation(image.imageOrientation)
+        // 將圖片轉換成model所需要的input, 讓model在背景執行運算
+        DispatchQueue.global(qos: .userInitiated).async {
+            let hadler = VNImageRequestHandler(ciImage: ciImage, orientation: orientation)
+            do {
+                // perform傳入是一個array, 所以我們可以同時執行多個vision request
+                try hadler.perform([self.classificationRequest])
+            } catch {
+                print("無法執行classification: \(error)")
+            }
+        }
     }
 }
 
