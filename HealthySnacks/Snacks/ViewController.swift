@@ -39,8 +39,27 @@ class ViewController: UIViewController {
     @IBOutlet var resultsLabel: UILabel!
     @IBOutlet var resultsConstraint: NSLayoutConstraint!
     
-    
-    
+    // lazy: 只要當第一次被呼叫才會執行, 之後就會重複利用
+    lazy var classificationRequest: VNCoreMLRequest = {
+        do {
+            // HealthySnacks這是當把mlmodel拉到專案時，自動產生的class
+            let healthySnacks = HealthySnacks()
+            // 建立pipeline, 將CoreML跟Vision產生連結
+            let visionModel = try VNCoreMLModel(for: healthySnacks.model)
+            // 這個request很重要，負擔大量的工作
+            // 1. 將傳入的image轉成CVPixelBuffer
+            // 2. 將大小切割成227×227
+            // 3. 將方向進行調整
+            let request = VNCoreMLRequest(model: visionModel) { [weak self] request, error in
+                print("Request 已經完成", request.results ?? "")
+            }
+            request.imageCropAndScaleOption = .centerCrop
+            return request
+        } catch {
+            // 讀取到無效的mlmodel
+            fatalError("無法產生 VNCoreMLModel: \(error)")
+        }
+    }()
     
     var firstTime = true
     
