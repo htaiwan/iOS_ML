@@ -43,9 +43,11 @@ class ViewController: UIViewController {
     lazy var classificationRequest: VNCoreMLRequest = {
         do {
             // HealthySnacks這是當把mlmodel拉到專案時，自動產生的class
-            let healthySnacks = HealthySnacks()
+//            let healthySnacks = HealthySnacks()
+            let multiSnacks = MultiSnacks()
             // 建立pipeline, 將CoreML跟Vision產生連結
-            let visionModel = try VNCoreMLModel(for: healthySnacks.model)
+//            let visionModel = try VNCoreMLModel(for: healthySnacks.model)
+            let visionModel = try VNCoreMLModel(for: multiSnacks.model)
             // 這個request很重要，負擔大量的工作
             // 1. 將傳入的image轉成CVPixelBuffer
             // 2. 將大小切割成227×227
@@ -139,6 +141,31 @@ class ViewController: UIViewController {
         }
     }
     
+//    func processObservations(for request: VNRequest, error: Error?) {
+//        // 回到main queue執行對應的UI操作
+//        DispatchQueue.main.async {
+//            if let results = request.results as? [VNClassificationObservation] {
+//                // 成功: 但沒東西
+//                if results.isEmpty {
+//                    self.resultsLabel.text = "沒找到任何東西"
+//                } else if results[0].confidence < 0.8 {
+//                    // 成功: 找到東西, 但不確定
+//                    self.resultsLabel.text = "不確定"
+//                } else {
+//                    // 成功: 找到東西, 且確定
+//                    self.resultsLabel.text = String(format: "%@ %.1f%%", results[0].identifier, results[0].confidence * 100)
+//                }
+//            } else if let error = error {
+//                // 失敗: 錯誤原因
+//                self.resultsLabel.text = "錯誤: \(error.localizedDescription)"
+//            } else {
+//                // 未知狀況
+//                self.resultsLabel.text = "發生未知狀況"
+//            }
+//            self.showResultsView()
+//        }
+//    }
+    
     func processObservations(for request: VNRequest, error: Error?) {
         // 回到main queue執行對應的UI操作
         DispatchQueue.main.async {
@@ -146,12 +173,13 @@ class ViewController: UIViewController {
                 // 成功: 但沒東西
                 if results.isEmpty {
                     self.resultsLabel.text = "沒找到任何東西"
-                } else if results[0].confidence < 0.8 {
-                    // 成功: 找到東西, 但不確定
-                    self.resultsLabel.text = "不確定"
                 } else {
-                    // 成功: 找到東西, 且確定
-                    self.resultsLabel.text = String(format: "%@ %.1f%%", results[0].identifier, results[0].confidence * 100)
+                    // 找到前3高機率的物品
+                    let top3 = results.prefix(3).map { observation in
+                        String(format: "%@ %.1f%%", observation.identifier, observation.confidence * 100)
+                    }
+                    
+                    self.resultsLabel.text = top3.joined(separator: "\n")
                 }
             } else if let error = error {
                 // 失敗: 錯誤原因
