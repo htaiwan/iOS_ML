@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		433D2CC624997D6F00F6DE02 /* HealthySnacks.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 433D2CC524997D6F00F6DE02 /* HealthySnacks.mlmodel */; };
+		433D2CC82499BE6500F6DE02 /* MultiSnacks.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 433D2CC72499BE6500F6DE02 /* MultiSnacks.mlmodel */; };
 		7B11BA832048333700D790AA /* CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B11BA822048333700D790AA /* CGImagePropertyOrientation.swift */; };
 		7BF6C660204818EC00606217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF6C65F204818EC00606217 /* AppDelegate.swift */; };
 		7BF6C662204818EC00606217 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF6C661204818EC00606217 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		433D2CC524997D6F00F6DE02 /* HealthySnacks.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HealthySnacks.mlmodel; sourceTree = "<group>"; };
+		433D2CC72499BE6500F6DE02 /* MultiSnacks.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MultiSnacks.mlmodel; sourceTree = "<group>"; };
 		7B11BA822048333700D790AA /* CGImagePropertyOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGImagePropertyOrientation.swift; sourceTree = "<group>"; };
 		7BF6C65C204818EC00606217 /* HealthySnacks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthySnacks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BF6C65F204818EC00606217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
@@ -58,6 +60,7 @@
 		7BF6C65E204818EC00606217 /* Snacks */ = {
 			isa = PBXGroup;
 			children = (
+				433D2CC72499BE6500F6DE02 /* MultiSnacks.mlmodel */,
 				433D2CC524997D6F00F6DE02 /* HealthySnacks.mlmodel */,
 				7BF6C65F204818EC00606217 /* AppDelegate.swift */,
 				7BF6C661204818EC00606217 /* ViewController.swift */,
@@ -144,6 +147,7 @@
 				7BF6C662204818EC00606217 /* ViewController.swift in Sources */,
 				7BF6C660204818EC00606217 /* AppDelegate.swift in Sources */,
 				7B11BA832048333700D790AA /* CGImagePropertyOrientation.swift in Sources */,
+				433D2CC82499BE6500F6DE02 /* MultiSnacks.mlmodel in Sources */,
 				433D2CC624997D6F00F6DE02 /* HealthySnacks.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,14 +293,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 27CD9Q9SM6;
 				INFOPLIST_FILE = Snacks/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HealthySnacks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.htaiwan.HealthySnacks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -308,14 +312,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 27CD9Q9SM6;
 				INFOPLIST_FILE = Snacks/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HealthySnacks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.htaiwan.HealthySnacks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
